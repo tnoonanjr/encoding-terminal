@@ -68,7 +68,7 @@ if cipher == "Base12":
             if ascii_val == 0:
                 print(base12_val,"", end="")
 
-# Base16
+# Base16 (Hexidecimal)
 if cipher == "Base16":
     plaintext_bytes = plaintext.encode("ascii") 
     base16_bytes = base64.b16encode(plaintext_bytes) 
