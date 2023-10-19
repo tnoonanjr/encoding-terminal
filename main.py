@@ -4,7 +4,7 @@ import base64
 # Inputs
 plaintext = input("Enter your plaintext:")
 cipher = input("Enter an encoding method:")
-methods = ['Caesar' , 'Binary' , 'Base4' , 'Base8' , 'Base10' , 'Base12' , 'Base64']
+methods = ['Caesar' , 'Binary' , 'Base4' , 'Base8' , 'Base10' , 'Base12' , 'Base16' , 'Base32' , 'Base64']
 
 # Caesar Cipher code
 if cipher == "Caesar":
@@ -68,6 +68,20 @@ if cipher == "Base12":
             if ascii_val == 0:
                 print(base12_val,"", end="")
 
+# Base16
+if cipher == "Base16":
+    plaintext_bytes = plaintext.encode("ascii") 
+    base16_bytes = base64.b16encode(plaintext_bytes) 
+    base16_string = base16_bytes.decode("ascii") 
+    print(base16_string)
+
+# Base32
+if cipher == "Base32":
+    plaintext_bytes = plaintext.encode("ascii") 
+    base32_bytes = base64.b32encode(plaintext_bytes) 
+    base32_string = base32_bytes.decode("ascii") 
+    print(base32_string)
+
 # Base64
 if cipher == "Base64":
     plaintext_bytes = plaintext.encode("ascii") 
@@ -79,4 +93,7 @@ if cipher == "Base64":
 if cipher not in methods:
     print('That method is not supported. Supported encoding includes:') 
     print(*methods, sep=", ")        
+                
     
+
+
