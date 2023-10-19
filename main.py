@@ -1,9 +1,10 @@
 import string
+import base64
 
 # Inputs
 plaintext = input("Enter your plaintext:")
 cipher = input("Enter an encoding method:")
-methods = ['Caesar', 'Binary', 'Base 4', 'Base 8', 'Base 10']
+methods = ['Caesar' , 'Binary' , 'Base4' , 'Base8' , 'Base10' , 'Base12' , 'Base64']
 
 # Caesar Cipher code
 if cipher == "Caesar":
@@ -21,14 +22,14 @@ if cipher == "Caesar":
     print(caesar(plaintext, input("Enter a shift value:"),
                  [string.ascii_lowercase, string.ascii_uppercase, string.punctuation]))
 
-# Base 2 (binary)
-if cipher == 'Binary':
+# Base2 (binary)
+if cipher == "Binary":
     binary = " ".join(format(ord(ch), "b") for ch in plaintext)
     # Each character has a space between because of the .join function, and it converts to binary with "b"
     print(binary)
 
-# Base 4 and Base 8
-base = ('Base 4' , 'Base 8')
+# Base4 (Quarternary) and Base8 (Octal)
+base = ("Base4" , "Base8")
 if cipher in base:
     ascii_list = []
     for char in plaintext:
@@ -36,24 +37,46 @@ if cipher in base:
         ascii_val = ord(char)
         ascii_list.append(ord(char))         
         while ascii_val > 0:
-            remainder = ascii_val % int(cipher[5])
+            remainder = ascii_val % int(cipher[4])
             base4_val = str(remainder)+base4_val
-            ascii_val //= int(cipher[5])
+            ascii_val //= int(cipher[4])
             base4_val=base4_val.zfill(1)
             if ascii_val == 0: 
                 print(base4_val,"", end="")
 
-# Base 10 
-if cipher == "Base 10":
+# Base10 (Decimal) 
+if cipher == "Base10":
     for char in plaintext:
         print(ord(char) , end=" ")
 
+# Base12 (Duodecimal/Dozenal)
+if cipher == "Base12":
+    ascii_list = []
+    for char in plaintext:
+        base12_val = ""
+        ascii_val = ord(char)
+        ascii_list.append(ord(char))
+        while ascii_val > 0:
+            remainder = ascii_val % 12
+            if remainder == 10:
+                    remainder = 'a' 
+            if remainder == 11:
+                remainder = 'b'
+            base12_val = str(remainder)+base12_val
+            ascii_val //= 12
+            base12_val = base12_val.zfill(1)
+            if ascii_val == 0:
+                print(base12_val,"", end="")
+
+# Base64
+if cipher == "Base64":
+    plaintext_bytes = plaintext.encode("ascii") 
+    base64_bytes = base64.b64encode(plaintext_bytes) 
+    base64_string = base64_bytes.decode("ascii") 
+    print(base64_string)
+
 # Else statement    
-else:
+if cipher not in methods:
     print('That method is not supported. Supported encoding includes:') 
-    print(*methods, sep=", ")         
-                
+    print(*methods, sep=", ")        
     
-
-
-        
