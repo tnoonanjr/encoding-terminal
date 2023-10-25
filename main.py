@@ -4,10 +4,11 @@ import base64
 # Inputs
 plaintext = input("Enter your plaintext:")
 cipher = input("Enter an encoding method:")
-methods = ['Caesar' , 'Binary' , 'Base4' , 'Base8' , 'Base10' , 'Base12' , 'Base16' , 'Base32' , 'Base64']
+methods = ['Caesar' , 'ROT13' , 'Binary' , 'Base4' , 'Base8' , 'Base10' , 'Base12' , 'Base16' , 'Base32' , 'Base64']
 
 # Caesar Cipher code
 if cipher == "Caesar":
+    
     def caesar(text, shift, alphabets):
         def shifted(alphabet):
             return alphabet[int(shift):] + alphabet[:int(shift)]
@@ -16,11 +17,28 @@ if cipher == "Caesar":
         final_alphabet = ''.join(alphabets)
         final_shifted = ''.join(shifted_alphabets)
         table = str.maketrans(final_alphabet, final_shifted)
+
         return text.translate(table)
     
-# ASCII stands for American Standard Code for Information Interchange
+    # ASCII stands for American Standard Code for Information Interchange
     print(caesar(plaintext, input("Enter a shift value:"),
                  [string.ascii_lowercase, string.ascii_uppercase, string.punctuation]))
+
+# ROT13 code (Caesar cipher with a shift of 13)
+if cipher == "ROT13":
+    def caesar(text, shift, alphabets):
+        def shifted(alphabet):
+            return alphabet[int(shift):] + alphabet[:int(shift)]
+
+        shifted_alphabets = tuple(map(shifted, alphabets))
+        final_alphabet = ''.join(alphabets)
+        final_shifted = ''.join(shifted_alphabets)
+        table = str.maketrans(final_alphabet, final_shifted)
+
+        return text.translate(table)
+    
+    print(caesar(plaintext, 13,
+                [string.ascii_lowercase, string.ascii_uppercase, string.punctuation]))
 
 # Base2 (binary)
 if cipher == "Binary":
@@ -68,7 +86,7 @@ if cipher == "Base12":
             if ascii_val == 0:
                 print(base12_val,"", end="")
 
-# Base16 (Hexidecimal)
+# Base16
 if cipher == "Base16":
     plaintext_bytes = plaintext.encode("ascii") 
     base16_bytes = base64.b16encode(plaintext_bytes) 
@@ -93,6 +111,9 @@ if cipher == "Base64":
 if cipher not in methods:
     print('That method is not supported. Supported encoding includes:') 
     print(*methods, sep=", ")        
+                
+    
+   
                 
     
 
