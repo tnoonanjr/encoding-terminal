@@ -42,10 +42,12 @@ if cipher == "ROT13":
 
 # Base2 (binary)
 if cipher == "Binary":
-    binary = " ".join(format(ord(ch), "b") for ch in plaintext)
-    # Each character has a space between because of the .join function, and it converts to binary with "b"
-    print(binary)
-
+    def convert_to_binary(plaintext):
+        binary = " ".join(format(ord(ch), "b") for ch in plaintext)
+        # Each character has a space between because of the.join function
+        return binary
+    print(convert_to_binary(plaintext))
+    
 # Base4 (Quarternary) and Base8 (Octal)
 base = ("Base4" , "Base8")
 if cipher in base:
@@ -88,30 +90,40 @@ if cipher == "Base12":
 
 # Base16
 if cipher == "Base16":
-    plaintext_bytes = plaintext.encode("ascii") 
-    base16_bytes = base64.b16encode(plaintext_bytes) 
-    base16_string = base16_bytes.decode("ascii") 
-    print(base16_string)
+    def convert_to_base16(plaintext):
+        plaintext_bytes = plaintext.encode("ascii") 
+        base16_bytes = base64.b16encode(plaintext_bytes) 
+        base16_string = base16_bytes.decode("ascii") 
+        return base16_string
+    print(convert_to_base16(plaintext))
 
 # Base32
 if cipher == "Base32":
-    plaintext_bytes = plaintext.encode("ascii") 
-    base32_bytes = base64.b32encode(plaintext_bytes) 
-    base32_string = base32_bytes.decode("ascii") 
-    print(base32_string)
+    def convert_to_base32(plaintext):
+        plaintext_bytes = plaintext.encode("ascii") 
+        base32_bytes = base64.b32encode(plaintext_bytes) 
+        base32_string = base32_bytes.decode("ascii") 
+        return base32_string 
+    print(convert_to_base32(plaintext)) 
 
 # Base64
 if cipher == "Base64":
-    plaintext_bytes = plaintext.encode("ascii") 
-    base64_bytes = base64.b64encode(plaintext_bytes) 
-    base64_string = base64_bytes.decode("ascii") 
-    print(base64_string)
+    def convert_to_base64(plaintext):
+        plaintext_bytes = plaintext.encode("ascii") 
+        base64_bytes = base64.b64encode(plaintext_bytes) 
+        base64_string = base64_bytes.decode("ascii") 
+        return base64_string
+    print(convert_to_base64(plaintext))
 
 # Else statement    
 if cipher not in methods:
     print('That method is not supported. Supported encoding includes:') 
     print(*methods, sep=", ")        
                 
+    
+
+
+
     
    
                 
